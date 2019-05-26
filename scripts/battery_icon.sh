@@ -51,9 +51,10 @@ print_icon() {
 	elif [[ $status =~ (^discharging) ]]; then
         # use code from the bg color
         percentage=$($CURRENT_DIR/battery_percentage.sh | sed -e 's/%//')
-        if [ $percentage -eq 100 ]; then
+        percentage=${percentage%.*}
+        if [ $percentage -ge 91 ]; then
             printf "$full_charge_icon"
-        elif [ $percentage -le 99 -a $percentage -ge 51 ];then
+        elif [ $percentage -le 90 -a $percentage -ge 51 ];then
             printf "$high_charge_icon"
         elif [ $percentage -le 50 -a $percentage -ge 16 ];then
             printf "$medium_charge_icon"
